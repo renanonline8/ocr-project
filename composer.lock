@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb1a6732ea7b6a7a56700b425a1689bc",
+    "content-hash": "02854ed57fb4e37904a13449a5191dce",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -358,6 +358,42 @@
             "time": "2018-11-20T15:27:04+00:00"
         },
         {
+            "name": "renanonline8/slim-utils",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/renanonline8/slim-utils.git",
+                "reference": "6364f8e06ed45fa9f51e43298190787892ec73fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/renanonline8/slim-utils/zipball/6364f8e06ed45fa9f51e43298190787892ec73fd",
+                "reference": "6364f8e06ed45fa9f51e43298190787892ec73fd",
+                "shasum": ""
+            },
+            "require": {
+                "slim/slim": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SlimUtils\\": "src/SlimUtils"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Renan Santos Gomes",
+                    "email": "renanonline8@gmail.com"
+                }
+            ],
+            "description": "Tools for Slim Framework",
+            "time": "2019-05-30T02:19:18+00:00"
+        },
+        {
             "name": "slim/php-view",
             "version": "2.2.1",
             "source": {
@@ -476,6 +512,51 @@
                 "router"
             ],
             "time": "2019-04-16T16:47:29+00:00"
+        },
+        {
+            "name": "thiagoalessio/tesseract_ocr",
+            "version": "2.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thiagoalessio/tesseract-ocr-for-php.git",
+                "reference": "b369b5496b6e809d012aacf06cbf2db5f6b29f76"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thiagoalessio/tesseract-ocr-for-php/zipball/b369b5496b6e809d012aacf06cbf2db5f6b29f76",
+                "reference": "b369b5496b6e809d012aacf06cbf2db5f6b29f76",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4 || ^7.0"
+            },
+            "require-dev": {
+                "codacy/coverage": "dev-master",
+                "phpunit/php-code-coverage": "^2.2.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "thiagoalessio\\TesseractOCR\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "thiagoalessio",
+                    "email": "thiagoalessio@me.com"
+                }
+            ],
+            "description": "A wrapper to work with Tesseract OCR inside PHP.",
+            "keywords": [
+                "OCR",
+                "Tesseract",
+                "text recognition"
+            ],
+            "time": "2019-01-30T19:47:33+00:00"
         }
     ],
     "packages-dev": [

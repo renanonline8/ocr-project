@@ -19,4 +19,15 @@ return function (App $app) {
         $logger->pushHandler(new \Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
         return $logger;
     };
+
+    // tesseract
+    $container['tesseract'] = function ($c) {
+        $tesseract = new \thiagoalessio\TesseractOCR\TesseractOCR();
+        return $tesseract;
+    };
+
+    // controllers
+    $container['testOCRController'] = function($c) {
+        return new \App\Controller\TestOCRController($c);
+    };
 };
