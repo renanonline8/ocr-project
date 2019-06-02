@@ -26,8 +26,19 @@ return function (App $app) {
         return $tesseract;
     };
 
+    /**
+     * Path to convert DIR
+     */
+    $container['toConvertDir'] = function ($c) {
+        return $c->get('settings')['upload_to_convert']['path'];
+    };
+
     // controllers
     $container['testOCRController'] = function($c) {
         return new \App\Controller\TestOCRController($c);
+    };
+
+    $container['convertController'] = function($c) {
+        return new \App\Controller\ConvertController($c);
     };
 };

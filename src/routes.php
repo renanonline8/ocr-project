@@ -10,4 +10,6 @@ return function (App $app) {
     $app->get('/testOCR/convert', 'testOCRController:convert');
     $app->get('/testOCR/langs', 'testOCRController:langAvailable');
     $app->get('/testOCR/version', 'testOCRController:version');
+
+    $app->post('/convert', 'convertController:convert');
 };

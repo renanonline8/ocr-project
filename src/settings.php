@@ -15,5 +15,9 @@ return [
             'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
+
+        'upload_to_convert' => [
+            'path' => __DIR__ . '/../uploads/images/to_convert'
+        ],
     ],
 ];
