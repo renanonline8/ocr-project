@@ -3,3 +3,5 @@
 !/logs/README.md
 /uploads/images/to_convert/*
 !/uploads/images/to_convert/README.md
+/download/toTxt/*
+/download/toPdf/*

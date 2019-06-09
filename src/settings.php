@@ -19,5 +19,9 @@ return [
         'upload_to_convert' => [
             'path' => __DIR__ . '/../uploads/images/to_convert'
         ],
+
+        'download' => [
+            'pathToTxt' => __DIR__ . '/../download/toTxt'
+        ]
     ],
 ];

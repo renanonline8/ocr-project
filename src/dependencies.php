@@ -33,6 +33,10 @@ return function (App $app) {
         return $c->get('settings')['upload_to_convert']['path'];
     };
 
+    $container['toTxtDir'] = function($c) {
+        return $c->get('settings')['download']['pathToTxt'];
+    };
+
     // controllers
     $container['testOCRController'] = function($c) {
         return new \App\Controller\TestOCRController($c);

@@ -5,6 +5,7 @@ use \SlimUtils\Controller\BaseController;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use Slim\Http\UploadedFile;
+use App\CreateFiles\ToTxt;
 
 final class ConvertController extends BaseController
 {
@@ -16,9 +17,13 @@ final class ConvertController extends BaseController
      * @param Array $args
      * @return void
      * @todo Marcar tempo da conversão e tamanho do arquivo
+     * @todo Validar linguas disponíveis
      */
     public function convert(Request $request, Response $response, Array $args)
     {
+        //Get Body
+        $body = $request->getParsedBody();
+
         //Upload image
         $directory = $this->toConvertDir;
         $uploadedFiles = $request->getUploadedFiles();
@@ -28,8 +33,25 @@ final class ConvertController extends BaseController
         }
         $filename = $this->moveUploadedFile($directory, $uploadedFile);
         $this->logger->debug('Upload realizado com sucesso', ['file' => $filename]);
+
+        //Convert to OCR
+        $imagePath = $directory. DIRECTORY_SEPARATOR . $filename; 
+        $textOCR = $this->tesseract
+            ->image($imagePath)
+            ->lang($body['lang'])
+            ->run();
+        $this->logger->debug('Converted to string: ' . $imagePath);
+
+        //Convert to Txt
+        $toTxt = new ToTXT($this->tesseract);
+        $localTxt = $toTxt->save($imagePath, $body['lang'], $this->toTxtDir);
+        $this->logger->debug('Converted to TXT, it is ' . $localTxt);
         
-        return $response->write('Convertido');
+        //Response
+        $resArr['success'] = true;
+        $resArr['text'] = $textOCR;
+        $resArr['pathToTxt'] = $localTxt;
+        return $response->withJson($resArr);
     }
 
     /**
