@@ -1,30 +1,16 @@
 <?php
 namespace App\CreateFiles;
 
-use Utils\File\FileName;
-
-class ToTxt
+class ToTxt extends BaseCreateFile implements InterfaceCreateFilesSave
 {
-    private $converter;
-
-    public function __construct($converter)
+    public function save(String $toConvert, String $lang, String $directory): String
     {
-        $this->converter = $converter;
-    }
-
-    public function save(String $toConvert, String $lang, String $directory):String
-    {
-        $basename = (new Filename)->generateName();
-        $extension = 'txt';
-        $file = $directory . DIRECTORY_SEPARATOR . sprintf('%s.%0.8s', $basename, $extension);
+        $file = $this->generateFile('txt', $directory);
         $textOCR = $this->converter
             ->image($toConvert)
             ->lang($lang)
             ->txt()
             ->run();
-        $fp = fopen($file, 'w');
-        fwrite($fp, $textOCR);
-        fclose($fp);
-        return $file;
+        return $this->writeFile($file, $textOCR);
     }
 }
