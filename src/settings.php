@@ -21,7 +21,8 @@ return [
         ],
 
         'download' => [
-            'pathToTxt' => __DIR__ . '/../download/toTxt'
+            'pathToTxt' => __DIR__ . '/../download/toTxt',
+            'pathToPDF' => __DIR__ . '/../download/toPdf'
         ]
     ],
 ];

@@ -6,6 +6,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use Slim\Http\UploadedFile;
 use App\CreateFiles\ToTxt;
+use App\CreateFiles\ToPDF;
 
 final class ConvertController extends BaseController
 {
@@ -46,11 +47,17 @@ final class ConvertController extends BaseController
         $toTxt = new ToTXT($this->tesseract);
         $localTxt = $toTxt->save($imagePath, $body['lang'], $this->toTxtDir);
         $this->logger->debug('Converted to TXT, it is ' . $localTxt);
+
+        //Convert to PDF
+        //$toPDF = new ToPDF($this->tesseract);
+        //$localPDF = $toPDF = $toPDF->save($imagePath, $body['lang'], $this->toPDFDir);
+        //$this->logger->debug('Converted to PDF, it is ' . $localTxt);
         
         //Response
         $resArr['success'] = true;
         $resArr['text'] = $textOCR;
         $resArr['pathToTxt'] = $localTxt;
+        $resArr['pathToPDF'] = $localPDF;
         return $response->withJson($resArr);
     }
 

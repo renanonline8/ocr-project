@@ -37,6 +37,10 @@ return function (App $app) {
         return $c->get('settings')['download']['pathToTxt'];
     };
 
+    $container['toPDFDir'] = function($c) {
+        return $c->get('settings')['download']['pathToPDF'];
+    };
+
     // controllers
     $container['testOCRController'] = function($c) {
         return new \App\Controller\TestOCRController($c);
