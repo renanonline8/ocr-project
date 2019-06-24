@@ -26,6 +26,11 @@ return function (App $app) {
         return $tesseract;
     };
 
+    //Upload
+    $container['upload'] = function ($c) {
+        return new Utils\Upload\Upload();
+    };
+
     /**
      * Path to convert DIR
      */

@@ -4,7 +4,6 @@ namespace App\Controller;
 use \SlimUtils\Controller\BaseController;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use Slim\Http\UploadedFile;
 use App\CreateFiles\ToTxt;
 use App\CreateFiles\ToPDF;
 
@@ -32,7 +31,7 @@ final class ConvertController extends BaseController
         if ($uploadedFile->getError() !== UPLOAD_ERR_OK) {
             return $response->write('Não deu certo o upload');
         }
-        $filename = $this->moveUploadedFile($directory, $uploadedFile);
+        $filename = $this->upload->moveUploadedFile($directory, $uploadedFile);
         $this->logger->debug('Upload realizado com sucesso', ['file' => $filename]);
 
         //Convert to OCR
@@ -44,9 +43,9 @@ final class ConvertController extends BaseController
         $this->logger->debug('Converted to string: ' . $imagePath);
 
         //Convert to Txt
-        $toTxt = new ToTXT($this->tesseract);
-        $localTxt = $toTxt->save($imagePath, $body['lang'], $this->toTxtDir);
-        $this->logger->debug('Converted to TXT, it is ' . $localTxt);
+        //$toTxt = new ToTXT($this->tesseract);
+        //$localTxt = $toTxt->save($imagePath, $body['lang'], $this->toTxtDir);
+        //$this->logger->debug('Converted to TXT, it is ' . $localTxt);
 
         //Convert to PDF
         //$toPDF = new ToPDF($this->tesseract);
@@ -56,28 +55,9 @@ final class ConvertController extends BaseController
         //Response
         $resArr['success'] = true;
         $resArr['text'] = $textOCR;
-        $resArr['pathToTxt'] = $localTxt;
-        $resArr['pathToPDF'] = $localPDF;
+        //$resArr['pathToTxt'] = $localTxt;
+        //$resArr['pathToPDF'] = $localPDF;
         return $response->withJson($resArr);
-    }
-
-    /**
-     * Move o arquivo para um diretório
-     *
-     * @param mixed $directory
-     * @param UploadedFile $uploadedFile
-     * @return String
-     * @todo Mover para um objeto específico
-     */
-    private function moveUploadedFile($directory, UploadedFile $uploadedFile): String
-    {
-        $extension = pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
-        $basename = bin2hex(random_bytes(8)); // see http://php.net/manual/en/function.random-bytes.php
-        $filename = sprintf('%s.%0.8s', $basename, $extension);
-
-        $uploadedFile->moveTo($directory . DIRECTORY_SEPARATOR . $filename);
-
-        return $filename;
     }
 
 }
